@@ -140,6 +140,15 @@ export const useUserStore = create<UserState>((set, get) => ({
 
   clearError: () => {
     set({ error: null })
+  },
+
+  canViewUserData: (module: keyof UserPrivacySettings['modules'], viewerContext: {
+    isOwner: boolean
+    isInSameCircle: boolean
+    isPublicViewer: boolean
+  }) => {
+    const { privacySettings } = get()
+    return checkPrivacyAccess(privacySettings, module, viewerContext)
   }
 }))
 

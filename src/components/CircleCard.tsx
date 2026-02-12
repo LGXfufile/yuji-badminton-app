@@ -3,7 +3,7 @@
 import React from 'react'
 import { Users, MapPin, Crown, Shield, Star, Settings, ExternalLink, UserPlus, MessageCircle } from 'lucide-react'
 import { Circle, CircleMembership, CIRCLE_TYPES } from '@/types/privacy'
-import { PrivacyIndicator } from './PrivacyIndicator'
+import PrivacyIndicator from './PrivacyIndicator'
 
 interface CircleCardProps {
   circle: Circle

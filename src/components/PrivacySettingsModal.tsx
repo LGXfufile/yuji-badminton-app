@@ -32,8 +32,8 @@ export default function PrivacySettingsModal({ isOpen, onClose }: PrivacySetting
         statistics: level,
         achievements: level,
         ranking: level,
-        equipment: level === 'private' ? 'private' : 'circle', // 装备信息默认圈子可见
-        social: 'private' // 社交信息始终私密
+        equipment: level === 'private' ? 'private' as PrivacyLevel : 'circle' as PrivacyLevel, // 装备信息默认圈子可见
+        social: 'private' as PrivacyLevel // 社交信息始终私密
       }
     }
     setPrivacySettings(newSettings)

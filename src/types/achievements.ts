@@ -1,3 +1,5 @@
+import { Match } from './index'
+
 export interface Achievement {
   id: string
   title: string
