@@ -95,21 +95,28 @@ export const useCircleStore = create<CircleState>((set, get) => ({
 
       await new Promise(resolve => setTimeout(resolve, 500))
 
-      const { myMemberships, circles } = get()
-      set({
-        myMemberships: [...myMemberships, newMembership],
-        loading: false,
-        error: null
-      })
-
+      const { myMemberships, circles, myCircles } = get()
       const circle = circles.find(c => c.id === circleId)
+      
       if (circle) {
+        set({
+          myMemberships: [...myMemberships, newMembership],
+          myCircles: [...myCircles, circle],
+          loading: false,
+          error: null
+        })
+
         get().updateCircle(circleId, { 
           memberCount: circle.memberCount + 1,
           stats: {
             ...circle.stats,
             activeMembers: circle.stats.activeMembers + 1
           }
+        })
+      } else {
+        set({
+          loading: false,
+          error: '圈子不存在'
         })
       }
     } catch (error: any) {
@@ -125,9 +132,10 @@ export const useCircleStore = create<CircleState>((set, get) => ({
     try {
       await new Promise(resolve => setTimeout(resolve, 500))
 
-      const { myMemberships, circles } = get()
+      const { myMemberships, circles, myCircles } = get()
       set({
         myMemberships: myMemberships.filter(m => m.circleId !== circleId),
+        myCircles: myCircles.filter(c => c.id !== circleId),
         loading: false,
         error: null
       })
